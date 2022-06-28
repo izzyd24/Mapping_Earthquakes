@@ -9,14 +9,46 @@
 // coordinate #2 = lng, third param = zoom level on a 0-18 scale
 let map = L.map('mapid').setView([40.7, -94.5], 4);
 
+// replaced simple one marker on LA to five most pop. cities array below
+let cities = [{
+    location: [40.7128, -74.0059],
+    city: "New York City",
+    state: "NY",
+    population: 8398748
+  },
+  {
+    location: [41.8781, -87.6298],
+    city: "Chicago",
+    state: "IL",
+    population: 2705994
+  },
+  {
+    location: [29.7604, -95.3698],
+    city: "Houston",
+    state: "TX",
+    population: 2325502
+  },
+  {
+    location: [34.0522, -118.2437],
+    city: "Los Angeles",
+    state: "CA",
+    population: 3990456
+  },
+  {
+    location: [33.4484, -112.0740],
+    city: "Phoenix",
+    state: "AZ",
+    population: 1660272
+  }
+  ];
 
-// add a marker to the simple map
-// mapping a marker on LA with increased circle radius
-let marker = L.circleMarker([34.0522, -118.2437], {
-    radius: 300,
-    color: "black",
-    fillColor: '#ffffa1'
-}).addTo(map);
+// with cities array created; want to iterate through it
+// make one marker per city
+cities.forEach(function(city) {
+    console.log(city)
+// assigned a var; used marker function, passed the location 
+let marker = L.marker(city.location).addTo(map);
+});
 
 // create a tile layer for the map
 // used to load, display a tile layer on the map
