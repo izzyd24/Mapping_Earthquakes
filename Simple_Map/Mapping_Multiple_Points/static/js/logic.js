@@ -14,10 +14,19 @@ let cityData = cities;
 
 // with cities array created; want to iterate through it
 // make one marker per city
-cities.forEach(function(city) {
+cityData.forEach(function(city) {
     console.log(city)
-// assigned a var; used marker function, passed the location 
-let marker = L.marker(city.location).addTo(map);
+    L.circlemarker(city.location, {
+        radius: city.population/100000
+    })
+    // added bindPopup function from leaflet
+    // retrieves the name of city, state, population
+    .bindPopup("<h2>" + city.city + 
+    ", " + city.state + 
+    "</h2> <hr> <h3>Population "
+    // added tolocale string method to show pop in thousands
+    + city.population.toLocaleString + "</h3>")
+    .addTo(map);
 });
 
 // create a tile layer for the map
