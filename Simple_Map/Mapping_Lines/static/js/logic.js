@@ -1,16 +1,15 @@
 // contains all data and js, leaflet code to make the map
 
-// Add console.log to check to see if our code is working.
-//console.log("working");
-
-// Create the map object with a center and zoom level.
-// var map assigned to obj lmap and instantiate the obj with a string mapid
-//setView() sets the view of the map with a center, coordinate #1 = lat
-// coordinate #2 = lng, third param = zoom level on a 0-18 scale
-let map = L.map('mapid').setView([40.7, -94.5], 4);
+// Create the map object with center at the San Francisco airport.
+let map = L.map('mapid').setView([37.6213, -122.3790], 5);
 
 // replaced simple one marker on LA to five most pop. from cities.js 
 let cityData = cities;
+
+// Create a polyline using the line coordinates and make the line red.
+L.polyline(line, {
+    color: "yellow"
+}).addTo(map);
 
 // with cities array created; want to iterate through it
 // make one marker per city
