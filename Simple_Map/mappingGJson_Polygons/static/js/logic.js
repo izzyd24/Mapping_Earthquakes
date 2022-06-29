@@ -50,8 +50,8 @@ d3.json(torontoHoods).then(function(data) {
         // make default layer = streets
         // with satellite streets as second option
         onEachFeature: function(feature, layer){
-            layer.bindPopup("<h3> Airline: " + feature.properties.airline + "</h3> >hr><h3> Destination: "
-            + feature.properties.dst + "</h3>");
+            layer.bindPopup("<h3> Neighborhood Name: " + feature.properties.AREA_NAME + "</h3> >hr><h3> Neighbordhood Number: "
+            + feature.properties.AREA_S_CD + "</h3>");
         }
     })
 .addTo(map);
