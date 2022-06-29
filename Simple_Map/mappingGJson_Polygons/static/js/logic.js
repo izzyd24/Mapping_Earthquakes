@@ -31,7 +31,7 @@ let map = L.map('mapid', {
 L.control.layers(baseMaps).addTo(map);
 
 // Grabbing our data from the toronoo json url for neighborhoods
-let torontHoods = "https://raw.githubusercontent.com/izzyd24/Mapping_Earthquakes/main/Simple_Map/torontoNeighborhoods.json";
+let torontoHoods = "https://raw.githubusercontent.com/izzyd24/Mapping_Earthquakes/main/Simple_Map/torontoNeighborhoods.json";
 
 // Create a style for the lines.
 let myStyle = {
@@ -41,7 +41,7 @@ let myStyle = {
 
 // Grabbing our GeoJSON data.
 // added the airportData url, within d3.json()
-d3.json(torontHoods).then(function(data) {
+d3.json(torontoHoods).then(function(data) {
     console.log(data);
     // create geojson layer with retrieved data
     L.geoJSON(data, {
@@ -54,5 +54,5 @@ d3.json(torontHoods).then(function(data) {
             + feature.properties.dst + "</h3>");
         }
     })
-    .addTo(map);
-    });
+.addTo(map);
+});
