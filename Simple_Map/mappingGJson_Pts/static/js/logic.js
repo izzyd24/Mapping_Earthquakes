@@ -1,15 +1,14 @@
 // contains all data and js, leaflet code to make the map
 // added folder
-// Create the map object with center at the San Francisco airport.
-let map = L.map('mapid').setView([37.5, -122.5], 10);
+// Create the map object with center and zoom level as given in 13.5.3
+let map = L.map('mapid').setView([30, 30], 2);
+
+// Grabbing our GeoJSON data from the .json url file
+let airportData = 
 
 // Grabbing our GeoJSON data.
-// referencing the sanFranAirport var from geoJson_data js file
-L.geoJSON(sanFranAirport, {
-    // add a popup marker for each feature, and get the data from properties in js object
-    // anon function to pass geojson feature + properties to layer
-    onEachFeature: function(feature, layer) {
-        console.log(layer);
-        layer.bindPopup();
-    }
-}).addTo(map);
+d3.json(airportData).then(function(data) {
+    console.log(data);
+  // Creating a GeoJSON layer with the retrieved data.
+  L.geoJSON(data).addTo(map);
+});
