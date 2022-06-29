@@ -46,15 +46,5 @@ let earthQ = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_mont
 // Grabbing our GeoJSON data.
 // added the airportData url, within d3.json()
 d3.json(earthQ).then(function(data) {
-    console.log(data).addTo(map)});
-    // create geojson layer with retrieved data
-    // L.geoJSON(data, {
-    //     style: myStyle,
-    //     // need to fix this to have popup of each neighborhood
-    //     // make default layer = streets
-    //     // with satellite streets as second option
-    //     onEachFeature: function(feature, layer){
-    //         layer.bindPopup("<h3> Neighborhood Name: " + feature.properties.AREA_NAME + "</h3> >hr><h3> Neighbordhood Number: "
-    //         + feature.properties.AREA_S_CD + "</h3>");
-    //     }
-    // })
+    L.geoJSON(data).addTo(map); 
+});
