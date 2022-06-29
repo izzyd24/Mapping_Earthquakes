@@ -1,3 +1,6 @@
+// add console log to check if code is working
+console.log("working");
+
 // create tile layer for background of map
 let streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -19,12 +22,12 @@ let baseMaps = {
     "Satellite Streets": satelliteStreets
 };
 
-// Create the map object with center and zoom level as given in 13.5.4
+// Create the map object with center and zoom level as given in 13.6.1
 let map = L.map('mapid', {
-    center: [43.7, -79.3],
-    zoom: 11,
+    center: [39.5, -98.5],
+    zoom: 3,
     // default layer
-    layers: [satelliteStreets]
+    layers: [streets]
 });
 
 // Pass our map layers into our layers control and add the layers control to the map.
@@ -32,28 +35,28 @@ L.control.layers(baseMaps).addTo(map);
 
 
 // Grabbing our data from the toronoo json url for neighborhoods
-let torontoHoods = "https://raw.githubusercontent.com/izzyd24/Mapping_Earthquakes/main/Simple_Map/torontoNeighborhoods.json";
+let earthQ = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson";
 
-// Create a style for the lines.
-let myStyle = {
-    color: "#ffffa1",
-    weight: 1
-}
+// // Create a style for the lines.
+// let myStyle = {
+//     color: "#ffffa1",
+//     weight: 1
+// }
 
 // Grabbing our GeoJSON data.
 // added the airportData url, within d3.json()
-d3.json(torontoHoods).then(function(data) {
-    console.log(data);
+d3.json(earthQ).then(function(data) {
+    console.log(data)
     // create geojson layer with retrieved data
-    L.geoJSON(data, {
-        style: myStyle,
-        // need to fix this to have popup of each neighborhood
-        // make default layer = streets
-        // with satellite streets as second option
-        onEachFeature: function(feature, layer){
-            layer.bindPopup("<h3> Neighborhood Name: " + feature.properties.AREA_NAME + "</h3> >hr><h3> Neighbordhood Number: "
-            + feature.properties.AREA_S_CD + "</h3>");
-        }
-    })
+    // L.geoJSON(data, {
+    //     style: myStyle,
+    //     // need to fix this to have popup of each neighborhood
+    //     // make default layer = streets
+    //     // with satellite streets as second option
+    //     onEachFeature: function(feature, layer){
+    //         layer.bindPopup("<h3> Neighborhood Name: " + feature.properties.AREA_NAME + "</h3> >hr><h3> Neighbordhood Number: "
+    //         + feature.properties.AREA_S_CD + "</h3>");
+    //     }
+    // })
 .addTo(map);
 });
