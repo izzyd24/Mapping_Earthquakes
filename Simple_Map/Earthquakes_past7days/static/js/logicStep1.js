@@ -35,7 +35,7 @@ L.control.layers(baseMaps).addTo(map);
 
 
 // Grabbing our data from the toronoo json url for neighborhoods
-let earthQ = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson";
+let earthQ = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
 // // Create a style for the lines.
 // let myStyle = {
