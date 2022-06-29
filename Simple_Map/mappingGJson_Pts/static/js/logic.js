@@ -1,7 +1,7 @@
 // contains all data and js, leaflet code to make the map
-// added for no reason
+// added folder
 // Create the map object with center at the San Francisco airport.
-let map = L.map('mapid').setView([37.6213, -122.3790], 5);
+let map = L.map('mapid').setView([37.5, -122.5], 10);
 
 // replaced simple one marker on LA to five most pop. from cities.js 
 let cityData = cities;
@@ -42,3 +42,6 @@ attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap
 // addTGo used to add the graymap obj tile layer to out let map above
 streets.addTo(map);
 
+
+
+sanFranAirport
