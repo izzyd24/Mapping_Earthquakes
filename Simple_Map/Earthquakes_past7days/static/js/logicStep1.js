@@ -15,7 +15,7 @@ let satelliteStreets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/sate
 // add both the streets and dark view vars to baseMaps var
 // this var will be our base layer
 let baseMaps = {
-    "Streets": streets, 
+    "Classic Streets": streets, 
     "Satellite Streets": satelliteStreets
 };
 
@@ -30,8 +30,9 @@ let map = L.map('mapid', {
 // Pass our map layers into our layers control and add the layers control to the map.
 L.control.layers(baseMaps).addTo(map);
 
+
 // Grabbing our data from the toronoo json url for neighborhoods
-let torontHoods = "https://raw.githubusercontent.com/izzyd24/Mapping_Earthquakes/main/Simple_Map/torontoNeighborhoods.json";
+let torontoHoods = "https://raw.githubusercontent.com/izzyd24/Mapping_Earthquakes/main/Simple_Map/torontoNeighborhoods.json";
 
 // Create a style for the lines.
 let myStyle = {
@@ -41,7 +42,7 @@ let myStyle = {
 
 // Grabbing our GeoJSON data.
 // added the airportData url, within d3.json()
-d3.json(torontHoods).then(function(data) {
+d3.json(torontoHoods).then(function(data) {
     console.log(data);
     // create geojson layer with retrieved data
     L.geoJSON(data, {
@@ -50,9 +51,9 @@ d3.json(torontHoods).then(function(data) {
         // make default layer = streets
         // with satellite streets as second option
         onEachFeature: function(feature, layer){
-            layer.bindPopup("<h3> Airline: " + feature.properties.airline + "</h3> >hr><h3> Destination: "
-            + feature.properties.dst + "</h3>");
+            layer.bindPopup("<h3> Neighborhood Name: " + feature.properties.AREA_NAME + "</h3> >hr><h3> Neighbordhood Number: "
+            + feature.properties.AREA_S_CD + "</h3>");
         }
     })
-    .addTo(map);
-    });
+.addTo(map);
+});
