@@ -1,5 +1,5 @@
 // add console log to check if code is working
-console.log("working");
+//console.log("working");
 
 // create tile layer for background of map
 let streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -46,7 +46,7 @@ let earthQ = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_mont
 // Grabbing our GeoJSON data.
 // added the airportData url, within d3.json()
 d3.json(earthQ).then(function(data) {
-    console.log(data)
+    console.log(data).addTo(map)});
     // create geojson layer with retrieved data
     // L.geoJSON(data, {
     //     style: myStyle,
@@ -58,5 +58,3 @@ d3.json(earthQ).then(function(data) {
     //         + feature.properties.AREA_S_CD + "</h3>");
     //     }
     // })
-.addTo(map);
-});
