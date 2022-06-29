@@ -28,8 +28,8 @@ let map = L.map('mapid', {
 // Pass our map layers into our layers control and add the layers control to the map.
 L.control.layers(baseMaps).addTo(map);
 
-// Grabbing our GeoJSON data from the .json url file
-let airportData = "https://github.com/izzyd24/Mapping_Earthquakes/blob/mappingGJson_Pts/majorAirports.json";
+// Grabbing our data from the toronoo json url
+let torontoData = "https://github.com/izzyd24/Mapping_Earthquakes/blob/mappingGJson_Pts/majorAirports.json";
 
 // Grabbing our GeoJSON data.
 // added the airportData url, within d3.json()
