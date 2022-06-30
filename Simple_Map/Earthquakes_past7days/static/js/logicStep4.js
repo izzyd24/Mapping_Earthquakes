@@ -19,6 +19,19 @@ let baseMaps = {
     "Satellite Streets": satelliteStreets
 };
 
+// Create the earthquake layer for our map.
+let earthquakes = new L.layerGroup();
+
+// We define an object that contains the overlays.
+// This overlay will be visible all the time.
+let overlays = {
+    Earthquakes: earthquakes
+};
+
+// Then we add a control to the map that will allow the user to change
+// which layers are visible.
+L.control.layers(baseMaps, overlays).addTo(map);
+
 // Create the map object with center and zoom level as given in 13.6.1
 let map = L.map('mapid', {
     center: [39.5, -98.5],
@@ -27,8 +40,6 @@ let map = L.map('mapid', {
     layers: [streets]
 });
 
-// Pass our map layers into our layers control and add the layers control to the map.
-L.control.layers(baseMaps).addTo(map);
 
 // Grabbing the data from a url here, instead of placing within d3.json()
 let earthQ = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
@@ -74,18 +85,20 @@ d3.json(earthQ).then(function(data) {
     }
 // create geojson layer with the retrieved data
 L.geoJSON(data, {
-    // using circlemarker on our map
+    // using circlemarker on our map for each feature
     pointTolayer: function(feature, latlng) {
         console.log(data);
         return L.circeleMarker (latlng);
     }, 
     // We set the style for each circleMarker using our styleInfo function.
-    style: styleInfo,
+style: styleInfo,
     // We create a popup for each circleMarker to display the magnitude and
     //  location of the earthquake after the marker has been created and styled.
-        onEachFeature: function(feature, layer) {
+    onEachFeature: function(feature, layer) {
         layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place);
     }
-}
-}).addTo(map);
+    }).addTo(earthquakes);
 
+    // then add earthquake layer to map
+    earthquakes.addTo(map);
+});
