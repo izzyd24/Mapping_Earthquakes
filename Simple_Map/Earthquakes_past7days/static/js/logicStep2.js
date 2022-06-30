@@ -1,6 +1,3 @@
-// add console log to check if code is working
-//console.log("working");
-
 // create tile layer for background of map
 let streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -33,34 +30,29 @@ let map = L.map('mapid', {
 // Pass our map layers into our layers control and add the layers control to the map.
 L.control.layers(baseMaps).addTo(map);
 
-
-// Grabbing our data from the toronoo json url for neighborhoods
+// Grabbing the data from a url here, instead of placing within d3.json()
 let earthQ = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
-
-// Create a style for the lines with function
-// pass arugment feature to reference the object's features
-function styleInfo(feature){
-    return {
-        opacity: 1,
-        fillOpacity: 1,
-        fillColor: "#ffae42",
-        color: "#000000",
-        // function within a function using radius based on mag
-        // earthquakes with mag of 0 = plot of radius of 1
-        radius: getRadius(magnitude) {
-            if (magnitude === 0) {
-                return 1;
-              }
-              return magnitude * 4;
-            }
-        stroke: true,
-        weight: 0.5
-    };
-}
 
 // Grabbing our GeoJSON data.
 // added the airportData url, within d3.json()
 d3.json(earthQ).then(function(data) {
+    function styleInfo(feature) {
+        return {
+        opacity: 1,
+        fillOpacity: 1,
+        fillColor: "#ffae42",
+        color: "#000000",
+        radius: getRadius(feature.properties.mag),
+        stroke: true,
+        weight: 0.5
+      };
+    }
+    function getRadius(magnitude) {
+      if (magnitude === 0) {
+        return 1;
+      }
+      return magnitude * 4;
+    }
     L.geoJSON(data, {
         // using circlemarker on our map
         pointTolayer: function(feature, latlng) {
